@@ -1,0 +1,84 @@
+import { createBrowserRouter } from 'react-router-dom';
+import PageOutlet from '@components/PageOutlet/PageOutlet';
+import MainPage from '@pages/home/MainPage';
+import LoginPage from '@pages/login/LoginPage';
+import { AddUserInfoPage, SignUpPage } from '@pages/signup';
+import { MyPage, MyInfoEditPage } from '@pages/my';
+import { CommunityPage, CommunityCreatePage, CommunityEditPage } from '@pages/community';
+import { PostPage, PostCreatePage, PostDetailPage, PostEditPage } from '@pages/community/[communityId]/post';
+import { AdminPage, CommunitySearchPage, MemberListPage } from '@pages/admin';
+
+const Routers = createBrowserRouter([
+  {
+    path: '/',
+    element: <PageOutlet />,
+    children: [
+      {
+        index: true,
+        element: <MainPage />,
+      },
+      {
+        path: 'login',
+        element: <LoginPage />,
+      },
+      {
+        path: 'signup',
+        element: <SignUpPage />,
+      },
+      {
+        path: 'signup/add',
+        element: <AddUserInfoPage />,
+      },
+      {
+        path: 'my',
+        element: <MyPage />,
+      },
+      {
+        path: 'my/edit',
+        element: <MyInfoEditPage />,
+      },
+      {
+        path: 'community/create',
+        element: <CommunityCreatePage />,
+      },
+      {
+        path: 'community/:communityId',
+        element: <CommunityPage />,
+      },
+      {
+        path: 'community/:communityId/edit',
+        element: <CommunityEditPage />,
+      },
+      {
+        path: 'community/:communityId/post',
+        element: <PostPage />,
+      },
+      {
+        path: 'community/:communityId/post/create',
+        element: <PostCreatePage />,
+      },
+      {
+        path: 'community/:communityId/post/:postId',
+        element: <PostDetailPage />,
+      },
+      {
+        path: 'community/:communityId/post/:postId/edit',
+        element: <PostEditPage />,
+      },
+      {
+        path: 'admin',
+        element: <AdminPage />,
+      },
+      {
+        path: 'admin/member',
+        element: <MemberListPage />,
+      },
+      {
+        path: 'admin/community',
+        element: <CommunitySearchPage />,
+      },
+    ],
+  },
+]);
+
+export default Routers;

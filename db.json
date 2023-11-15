@@ -1,0 +1,359 @@
+{
+  "community": [
+    {
+      "category": {
+        "categoryId": 1,
+        "categoryName": "카테고리1"
+      },
+      "communityId": 1,
+      "communityTitle": "떡잎마을1",
+      "communityContent": "커뮤니티내용커뮤니티내용커뮤니티내용커뮤니티내용1",
+      "imagePath": "src/assets/images/cataegoryImg.png",
+      "communityParticipant": 10,
+      "authorName": "호스트이름",
+      "participantsCompleted": "참여인원완료"
+    },
+
+    {
+      "category": {
+        "categoryId": 1,
+        "categoryName": "카테고리1"
+      },
+      "communityId": 2,
+      "communityTitle": "떡잎마을2",
+      "communityContent": "커뮤니티내용커뮤니티내용커뮤니티내용커뮤니티내용2",
+      "imagePath": "src/assets/images/cataegoryImg.png",
+      "communityParticipant": 10,
+      "authorName": "호스트이름",
+      "participantsCompleted": "참여인원완료"
+    },
+
+    {
+      "category": {
+        "categoryId": 1,
+        "categoryName": "카테고리1"
+      },
+      "communityId": 3,
+      "communityTitle": "커뮤니티제목3",
+      "communityContent": "커뮤니티내용커뮤니티내용커뮤니티내용커뮤니티내용3",
+      "imagePath": "src/assets/images/cataegoryImg.png",
+      "communityParticipant": 10,
+      "authorName": "호스트이름",
+      "participantsCompleted": "참여인원완료"
+    },
+    {
+      "category": {
+        "categoryId": 1,
+        "categoryName": "카테고리1"
+      },
+      "communityId": 4,
+      "communityTitle": "커뮤니티제목4",
+      "communityContent": "커뮤니티내용커뮤니티내용커뮤니티내용커뮤니티내용4",
+      "imagePath": "src/assets/images/cataegoryImg.png",
+      "communityParticipant": 10,
+      "authorName": "호스트이름",
+      "participantsCompleted": "참여인원완료"
+    },
+    {
+      "category": {
+        "categoryId": 1,
+        "categoryName": "카테고리1"
+      },
+      "communityId": 5,
+      "communityTitle": "커뮤니티제목5",
+      "communityContent": "커뮤니티내용커뮤니티내용커뮤니티내용커뮤니티내용5",
+      "imagePath": "src/assets/images/cataegoryImg.png",
+      "communityParticipant": 10,
+      "authorName": "호스트이름",
+      "participantsCompleted": "참여인원완료"
+    },
+    {
+      "category": {
+        "categoryId": 1,
+        "categoryName": "카테고리1"
+      },
+      "communityId": 6,
+      "communityTitle": "커뮤니티제목6",
+      "communityContent": "커뮤니티내용커뮤니티내용커뮤니티내용커뮤니티내용6",
+      "imagePath": "src/assets/images/cataegoryImg.png",
+      "communityParticipant": 10,
+      "authorName": "호스트이름",
+      "participantsCompleted": "참여인원완료"
+    },
+    {
+      "category": {
+        "categoryId": 1,
+        "categoryName": "카테고리1"
+      },
+      "communityId": 7,
+      "communityTitle": "커뮤니티제목7",
+      "communityContent": "커뮤니티내용커뮤니티내용커뮤니티내용커뮤니티내용7",
+      "imagePath": "src/assets/images/cataegoryImg.png",
+      "communityParticipant": 10,
+      "authorName": "호스트이름",
+      "participantsCompleted": "참여인원완료"
+    },
+    {
+      "category": {
+        "categoryId": 1,
+        "categoryName": "카테고리1"
+      },
+      "communityId": 8,
+      "communityTitle": "커뮤니티제목8",
+      "communityContent": "커뮤니티내용커뮤니티내용커뮤니티내용커뮤니티내용8",
+      "imagePath": "src/assets/images/cataegoryImg.png",
+      "communityParticipant": 10,
+      "authorName": "호스트이름",
+      "participantsCompleted": "참여인원완료"
+    },
+    {
+      "category": {
+        "categoryId": 1,
+        "categoryName": "카테고리1"
+      },
+      "communityId": 9,
+      "communityTitle": "커뮤니티제목9",
+      "communityContent": "커뮤니티내용커뮤니티내용커뮤니티내용커뮤니티내용9",
+      "imagePath": "src/assets/images/cataegoryImg.png",
+      "communityParticipant": 10,
+      "authorName": "호스트이름",
+      "participantsCompleted": "참여인원완료"
+    },
+    {
+      "category": {
+        "categoryId": 1,
+        "categoryName": "카테고리1"
+      },
+      "communityId": 10,
+      "communityTitle": "커뮤니티제목10",
+      "communityContent": "커뮤니티내용커뮤니티내용커뮤니티내용커뮤니티내용10",
+      "imagePath": "src/assets/images/cataegoryImg.png",
+      "communityParticipant": 10,
+      "authorName": "호스트이름",
+      "participantsCompleted": "참여인원완료"
+    },
+    {
+      "category": {
+        "categoryId": 1,
+        "categoryName": "카테고리1"
+      },
+      "communityId": 11,
+      "communityTitle": "커뮤니티제목11",
+      "communityContent": "커뮤니티내용커뮤니티내용커뮤니티내용커뮤니티내용11",
+      "imagePath": "src/assets/images/cataegoryImg.png",
+      "communityParticipant": 10,
+      "authorName": "호스트이름",
+      "participantsCompleted": "참여인원완료"
+    },
+    {
+      "category": {
+        "categoryId": 1,
+        "categoryName": "카테고리1"
+      },
+      "communityId": 12,
+      "communityTitle": "커뮤니티제목12",
+      "communityContent": "커뮤니티내용커뮤니티내용커뮤니티내용커뮤니티내용12",
+      "imagePath": "src/assets/images/cataegoryImg.png",
+      "communityParticipant": 10,
+      "authorName": "호스트이름",
+      "participantsCompleted": "참여인원완료"
+    },
+    {
+      "category": {
+        "categoryId": 2,
+        "categoryName": "카테고리2"
+      },
+      "communityId": 1,
+      "communityTitle": "커뮤니티제목1",
+      "communityContent": "커뮤니티내용커뮤니티내용커뮤니티내용커뮤니티내용1",
+      "imagePath": "src/assets/images/cataegoryImg.png",
+      "communityParticipant": 10,
+      "authorName": "호스트이름",
+      "participantsCompleted": "참여인원완료"
+    },
+    {
+      "category": {
+        "categoryId": 2,
+        "categoryName": "카테고리2"
+      },
+      "communityId": 2,
+      "communityTitle": "커뮤니티제목2",
+      "communityContent": "커뮤니티내용커뮤니티내용커뮤니티내용커뮤니티내용2",
+      "imagePath": "src/assets/images/cataegoryImg.png",
+      "communityParticipant": 10,
+      "authorName": "호스트이름",
+      "participantsCompleted": "참여인원완료"
+    },
+    {
+      "category": {
+        "categoryId": 2,
+        "categoryName": "카테고리2"
+      },
+      "communityId": 3,
+      "communityTitle": "커뮤니티제목3",
+      "communityContent": "커뮤니티내용커뮤니티내용커뮤니티내용커뮤니티내용3",
+      "imagePath": "src/assets/images/cataegoryImg.png",
+      "communityParticipant": 10,
+      "authorName": "호스트이름",
+      "participantsCompleted": "참여인원완료"
+    },
+    {
+      "category": {
+        "categoryId": 2,
+        "categoryName": "카테고리2"
+      },
+      "communityId": 4,
+      "communityTitle": "커뮤니티제목4",
+      "communityContent": "커뮤니티내용커뮤니티내용커뮤니티내용커뮤니티내용4",
+      "imagePath": "src/assets/images/cataegoryImg.png",
+      "communityParticipant": 10,
+      "authorName": "호스트이름",
+      "participantsCompleted": "참여인원완료"
+    },
+
+    {
+      "category": {
+        "categoryId": 3,
+        "categoryName": "카테고리3"
+      },
+      "communityId": 1,
+      "communityTitle": "커뮤니티제목1",
+      "communityContent": "커뮤니티내용커뮤니티내용커뮤니티내용커뮤니티내용1",
+      "imagePath": "src/assets/images/cataegoryImg.png",
+      "communityParticipant": 10,
+      "authorName": "호스트이름",
+      "participantsCompleted": "참여인원완료"
+    },
+    {
+      "category": {
+        "categoryId": 3,
+        "categoryName": "카테고리3"
+      },
+      "communityId": 2,
+      "communityTitle": "커뮤니티제목2",
+      "communityContent": "커뮤니티내용커뮤니티내용커뮤니티내용커뮤니티내용2",
+      "imagePath": "src/assets/images/cataegoryImg.png",
+      "communityParticipant": 10,
+      "authorName": "호스트이름",
+      "participantsCompleted": "참여인원완료"
+    },
+    {
+      "category": {
+        "categoryId": 3,
+        "categoryName": "카테고리3"
+      },
+      "communityId": 3,
+      "communityTitle": "커뮤니티제목3",
+      "communityContent": "커뮤니티내용커뮤니티내용커뮤니티내용커뮤니티내용3",
+      "imagePath": "src/assets/images/cataegoryImg.png",
+      "communityParticipant": 10,
+      "authorName": "호스트이름",
+      "participantsCompleted": "참여인원완료"
+    },
+    {
+      "category": {
+        "categoryId": 3,
+        "categoryName": "카테고리3"
+      },
+      "communityId": 4,
+      "communityTitle": "커뮤니티제목4",
+      "communityContent": "커뮤니티내용커뮤니티내용커뮤니티내용커뮤니티내용4",
+      "imagePath": "src/assets/images/cataegoryImg.png",
+      "communityParticipant": 10,
+      "authorName": "호스트이름",
+      "participantsCompleted": "참여인원완료"
+    },
+
+    {
+      "category": {
+        "categoryId": 4,
+        "categoryName": "카테고리4"
+      },
+      "communityId": 1,
+      "communityTitle": "커뮤니티제목1",
+      "communityContent": "커뮤니티내용커뮤니티내용커뮤니티내용커뮤니티내용1",
+      "imagePath": "src/assets/images/cataegoryImg.png",
+      "communityParticipant": 10,
+      "authorName": "호스트이름",
+      "participantsCompleted": "참여인원완료"
+    },
+    {
+      "category": {
+        "categoryId": 4,
+        "categoryName": "카테고리4"
+      },
+      "communityId": 2,
+      "communityTitle": "커뮤니티제목2",
+      "communityContent": "커뮤니티내용커뮤니티내용커뮤니티내용커뮤니티내용2",
+      "imagePath": "src/assets/images/cataegoryImg.png",
+      "communityParticipant": 10,
+      "authorName": "호스트이름",
+      "participantsCompleted": "참여인원완료"
+    },
+    {
+      "category": {
+        "categoryId": 4,
+        "categoryName": "카테고리4"
+      },
+      "communityId": 3,
+      "communityTitle": "커뮤니티제목3",
+      "communityContent": "커뮤니티내용커뮤니티내용커뮤니티내용커뮤니티내용3",
+      "imagePath": "src/assets/images/cataegoryImg.png",
+      "communityParticipant": 10,
+      "authorName": "호스트이름",
+      "participantsCompleted": "참여인원완료"
+    },
+    {
+      "category": {
+        "categoryId": 4,
+        "categoryName": "카테고리4"
+      },
+      "communityId": 4,
+      "communityTitle": "커뮤니티제목4",
+      "communityContent": "커뮤니티내용커뮤니티내용커뮤니티내용커뮤니티내용4",
+      "imagePath": "src/assets/images/cataegoryImg.png",
+      "communityParticipant": 10,
+      "authorName": "호스트이름",
+      "participantsCompleted": "참여인원완료"
+    }
+  ],
+
+  "communityDetail": [
+    {
+      "categoryId": 1,
+      "communityId": 1,
+      "communityTitle": "커뮤니티제목1",
+      "communityParticipant": 0,
+      "communityMaxParticipant": 10,
+      "communityAuthor": "null",
+      "communityStatus": "모집중",
+      "communityContent": "커뮤니티내용1",
+      "communityLocation": "서울시 강남구",
+      "postTime": "23/10/10 10:00",
+      "communityImgPathList": [
+        {
+          "communityImgNum": 1,
+          "communityImgPath": "/src/assets/images/CommunityIntro.png"
+        }
+      ]
+    },
+    {
+      "categoryId": 2,
+      "communityId": 2,
+      "communityTitle": "커뮤니티제목2",
+      "communityParticipant": 0,
+      "communityMaxParticipant": 10,
+      "communityAuthor": "null",
+      "communityStatus": "모집중",
+      "communityContent": "커뮤니티내용2",
+      "communityLocation": "부산시 수영구",
+      "postTime": "23/10/15 11:00",
+      "communityImgPathList": [
+        {
+          "communityImgNum": 2,
+          "communityImgPath": "/src/assets/images/CommunnityCover.png"
+        }
+      ]
+    }
+  ]
+}

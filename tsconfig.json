@@ -3,13 +3,14 @@
     "target": "ES2020",
     "baseUrl": "./",
     "paths": {
-      "@apis/*": ["src/apis/*"], 
-      "@assets/*": ["src/assets/*"], 
-      "@components/*": ["src/components/*"], 
+      "@apis/*": ["src/apis/*"],
+      "@assets/*": ["src/assets/*"],
+      "@components/*": ["src/components/*"],
       "@hooks/*": ["src/hooks/*"],
       "@interfaces/*": ["src/interfaces/*"],
       "@pages/*": ["src/pages/*"],
       "@routers/*": ["src/routers/*"],
+      "@constants/*": ["src/constants/*"],
       "@stores/*": ["src/stores/*"],
       "@utils/*": ["src/utils/*"]
     },
@@ -32,6 +33,5 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"],
-  
+  "include": ["src"]
 }
