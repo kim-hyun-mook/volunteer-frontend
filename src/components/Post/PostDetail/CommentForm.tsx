@@ -1,17 +1,20 @@
 import { commentUserResponseDto, getPostDetail, postComment } from '@apis/post/detail';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useQueryClient, useMutation, useQuery } from 'react-query';
 import TextareaLabel from '@components/ui/Textarea';
 import * as S from './style';
 import { useParams } from 'react-router-dom';
+import { manageStatus } from '@hooks/queries/error';
 
 function CommentForm() {
   const [comment, setComment] = useState('');
   const { communityId, postId } = useParams();
   const queryClient = useQueryClient();
+  const [isCommentValid, setIsCommentValid] = useState(true);
+  const errorMessagesRef = useRef<HTMLDivElement | null>(null);
 
   //게시글 상세 정보를 불러오는 쿼리
-  const { isLoading, isError, data } = useQuery<commentUserResponseDto, Error>('detail', async () => {
+  const { isLoading, isError, error, data } = useQuery<commentUserResponseDto, Error>('detail', async () => {
     const result = await getPostDetail(Number(postId), Number(communityId));
     console.log(result);
     return result;
@@ -24,15 +27,32 @@ function CommentForm() {
     },
   });
 
+  const onBlur = () => {
+    const trimmedComment = comment.trim();
+    setIsCommentValid(trimmedComment !== '');
+
+    // null 체크를 수행하고 안전하게 접근
+    if (errorMessagesRef.current) {
+      errorMessagesRef.current.innerText = trimmedComment !== '' ? '' : '댓글을 작성해주세요.';
+    }
+  };
+
   const handleCommentSubmit = async (event: any) => {
     event.preventDefault();
+
+    // 텍스트 입력이 없을 경우 댓글 등록 불가
+    if (comment.trim() === '') {
+      console.error('댓글을 작성해주세요.');
+      return;
+    }
+
     try {
       await commentMutation.mutateAsync({
         postId: Number(postId),
         communityId: Number(communityId),
         commentContent: comment,
       });
-      console.log('postId, communityId, commenxtContent');
+      console.log('postId, communityId, commentContent');
       setComment(''); // 댓글 입력 필드 초기화
     } catch (error) {
       console.error('댓글 게시 중 오류 발생', error);
@@ -50,12 +70,10 @@ function CommentForm() {
   };
 
   // 로딩 중이거나 에러가 발생했을 때 렌더링할 내용
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
+  const managedStatus = manageStatus({ isLoading, isError }, { error });
 
-  if (isError) {
-    return <div>에러가 발생하였습니다.{isError.message}</div>;
+  if (managedStatus) {
+    return managedStatus;
   }
 
   if (!data) {
@@ -76,10 +94,19 @@ function CommentForm() {
         value={comment}
         placeholder="자유롭게 댓글을 작성해주세요."
         onChange={onChange}
-        required
+        labelText={''}
+        validateText={''}
+        isValid={isCommentValid}
+        onBlur={onBlur}
       />
+      <div ref={errorMessagesRef} style={{ color: 'red' }}></div>
       <div className="FormBlockSubmit">
-        <S.CommentFormBtn value="등록" className="formBtnSubmit" onClick={handleCommentSubmit}>
+        <S.CommentFormBtn
+          value="등록"
+          className="formBtnSubmit"
+          onClick={handleCommentSubmit}
+          disabled={!isCommentValid}
+        >
           등록
         </S.CommentFormBtn>
       </div>

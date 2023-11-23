@@ -33,7 +33,8 @@ export const InputLabelWrap = styled.div`
   }
 
   p {
-    font-size: 14px;
+    font-size: 16px;
+    font-weight: 600;
     height: 14px;
     margin: 10px 0;
   }

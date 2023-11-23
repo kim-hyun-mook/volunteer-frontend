@@ -1,5 +1,6 @@
 import { Input } from '@components/ui/Input';
 import * as S from './style';
+import { useFormState } from '@hooks/form';
 interface ProfileProps {
   initialData: {
     nickName: string;
@@ -8,36 +9,36 @@ interface ProfileProps {
 }
 
 const ProfileEditForm = ({ initialData }: ProfileProps) => {
-	// const { formData, handleChange } = useProfileFormState(initialData);
-	// const { validateStatus, validateMessage, validateNickName, validatePhoneNumber, profileFormRef } =useProfileValidation();
+  const { postFormData, handleChange } = useFormState(initialData);
+
   return (
     <S.ProfileFormWrap>
       <div>{/* <Image/> */}</div>
       <S.ProfileForm>
-        {/* <Input
+        <Input
           labelText="닉네임"
           type="text"
           placeholder="닉네임을 입력해주세요"
           name="nickName"
-          value={formData.nickName}
+          value={postFormData.nickName}
           onChange={handleChange}
-          ref={(ref) => profileFormRef('nickName', ref)}
-          isValid={validateStatus.nickName}
-					validateText={validateMessage.nickName}
-					onBlur={validateNickName}
+          // ref={(ref) => profileFormRef('nickName', ref)}
+          // isValid={validateStatus.nickName}
+          // validateText={validateMessage.nickName}
+          // onBlur={validateNickName}
         />
         <Input
           labelText="휴대폰 번호"
           type="text"
           placeholder="전화번호를 입력해주세요"
           name="phoneNum"
-          value={formData.phoneNum}
+          value={postFormData.phoneNum}
           onChange={handleChange}
-          ref={(ref) => profileFormRef('phoneNum', ref)}
-          validateText={validateMessage.phoneNum}
-					isValid={validateStatus.phoneNum}
-					onBlur={validatePhoneNumber}
-        /> */}
+          // ref={(ref) => profileFormRef('phoneNum', ref)}
+          // validateText={validateMessage.phoneNum}
+          // isValid={validateStatus.phoneNum}
+          // onBlur={validatePhoneNumber}
+        />
       </S.ProfileForm>
     </S.ProfileFormWrap>
   );

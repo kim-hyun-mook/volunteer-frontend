@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { selectActiveIndex } from '@stores/slices/NavCatrgorySlice.ts';
 import { useQuery } from 'react-query';
-import { getCommunityData } from '@apis/community/community.ts'; 
+import { getCommunityData } from '@apis/community/community.ts';
 import * as S from '@pages/home/styles/CategoryListStyle';
 import { Community, QueryData } from '@interfaces/Community.ts';
 import CategorySearch from '@pages/home/CategorySearch.tsx';
@@ -20,6 +20,15 @@ const CategoryList = () => {
 
   // searched 상태와 해당 상태를 변경할 함수 설정
   const [searched, setSearched] = useState(false);
+
+  const [searchField, setSearchField] = useState('communityTitle');
+
+  const handleSearch = (query: string, field: string) => {
+    // 수정: handleSearch 함수
+    setSearchQuery(query);
+    setSearchField(field);
+    setSearched(true);
+  };
 
   useEffect(() => {
     // activeIndex가 변경될 때 검색 상태 초기화
@@ -47,13 +56,11 @@ const CategoryList = () => {
     activeIndex >= 0
       ? (filteredData ? filteredData : defaultData).filter(
           (community) =>
-            typeof searchQuery === 'string' &&
-            community.communityTitle.toLowerCase().includes(searchQuery.toLowerCase())
+            typeof searchQuery === 'string' && community[searchField].toLowerCase().includes(searchQuery.toLowerCase())
         )
       : defaultData.filter(
           (community) =>
-            typeof searchQuery === 'string' &&
-            community.communityTitle.toLowerCase().includes(searchQuery.toLowerCase())
+            typeof searchQuery === 'string' && community[searchField].toLowerCase().includes(searchQuery.toLowerCase())
         );
 
   // 사용할 데이터
@@ -78,7 +85,7 @@ const CategoryList = () => {
   return (
     <S.CategoryListWrap>
       <CategorySearch
-        onSearch={setSearchQuery}
+        onSearch={handleSearch}
         filteredData={filteredDataToShow}
         searched={searched}
         setSearched={setSearched}

@@ -2,7 +2,7 @@ import { ChangeEvent, forwardRef, ForwardedRef } from 'react';
 import * as S from '../style';
 import Paragraph from '@components/ui/Paragraph/Paragraph';
 
-export interface InputProps extends React.HTMLProps<HTMLInputElement>{
+export interface InputProps extends React.HTMLProps<HTMLInputElement> {
   name: string;
   type: 'text' | 'number';
   value: string | number;
@@ -11,12 +11,12 @@ export interface InputProps extends React.HTMLProps<HTMLInputElement>{
   labelText: string;
   validateText?: string;
   onBlur?: () => void;
-  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
 const Input = forwardRef(
   (
-    { type, labelText, isValid, validateText, name, value, placeholder, onBlur, onChange,...props }: InputProps,
+    { type, labelText, isValid, validateText, name, value, placeholder, onBlur, onChange, ...props }: InputProps,
     ref?: ForwardedRef<HTMLInputElement>
   ) => {
     return (
@@ -32,7 +32,7 @@ const Input = forwardRef(
           onBlur={onBlur}
           onChange={onChange}
         />
-   <Paragraph paragraphText={validateText} $isValid={isValid} />
+        <Paragraph paragraphText={validateText} $isValid={isValid} />
       </S.InputLabelWrap>
     );
   }

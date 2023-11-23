@@ -1,6 +1,21 @@
 import { Column } from 'react-table';
 
-export const communityColumns: Column<Data>[] = [
+// type Data = {
+//   communityId: number;
+//   categoryType: string;
+//   communityTitle: string;
+//   communityParticipant: number;
+//   communityMaxParticipant: number;
+//   communityAuthor: string;
+//   communityStatus: string;
+//   communityContent: string;
+//   communityLocation: string;
+//   communityMainImgPath: string;
+//   communityCreatedAt: Date;
+//   communityUpdatedAt: Date;
+// };
+
+export const communityColumns: Column<object>[] = [
   {
     Header: '번호',
     accessor: 'communityId',

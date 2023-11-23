@@ -42,13 +42,24 @@ const FileInput = forwardRef(
       if (imageUrls && imageUrls.length > 0) {
         for (let i = 0; i < imageUrls.length; i++) {
           previews[i] = imageUrls[i];
+        console.log(previews)
         }
       }
 
-      return previews.map((url, index) => (
-        <ImagePreview key={index} src={url} alt={`${index}`} isExist={url !== DefalutImage} onClick={onClick} />
-      ));
+      return previews.map((url, index) => {
+        const src = typeof url === 'string' ? url : url.communityImgPath;
+        
+        return <ImagePreview
+          key={index}
+          src={src}
+          alt={`${index}`}
+          isExist={url !== DefalutImage}
+          onClick={onClick}
+        />
+      });
     };
+
+    console.log(imageUrls)
 
     return (
       <S.InputLabelWrap>

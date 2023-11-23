@@ -1,6 +1,6 @@
 import { FormEvent } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
-import { PostData } from '@apis/post';
+import { PostData, UpdatePostData } from '@apis/post';
 import { useFormState } from '@hooks/form';
 import TextareaLabel from '@components/ui/Textarea';
 import { FileInput, Input } from '@components/ui/Input';
@@ -8,15 +8,17 @@ import * as S from './style';
 import useShownModal from '@hooks/modal';
 import Modal from '@components/ui/Modal';
 
+
 interface PostFormProps {
   initialData: {
     [key: string]: any;
   };
-  mutate: (postData: PostData) => void;
+  onSave?: (postData: PostData) => void;
+  onEdit?:(postData: UpdatePostData) => void
   initialImageURLs?: (string | null)[]; // ['slkeke']  [null]
 }
 
-const PostForm = ({ initialData, initialImageURLs, mutate }: PostFormProps) => {
+const PostForm = ({ initialData, initialImageURLs, onSave, onEdit }: PostFormProps) => {
   const pathName = useLocation().pathname;
   const { communityId, postId } = useParams();
   const isPostCreatePage = pathName === `/community/${communityId}/post/create`;
@@ -27,9 +29,8 @@ const PostForm = ({ initialData, initialImageURLs, mutate }: PostFormProps) => {
   );
 
   const { posterTitle, file, posterContent } = postFormData;
-  const isEmptyFormData = !(posterTitle && posterContent && file.length);
+  const isEmptyFormData = !(posterTitle && posterContent && file?.length);
   const { setIsShown, isShown, handleCloseClick } = useShownModal();
-
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (isEmptyFormData) {
@@ -56,9 +57,9 @@ const PostForm = ({ initialData, initialImageURLs, mutate }: PostFormProps) => {
       const blob = new Blob([jsonFormData], { type: 'application/json' });
       formData.append('data', blob);
       if (postId) {
-        // mutate({ postData: formData, communityId: communityId, postId: postId })
+        onEdit?.({ postData: formData, communityId: communityId, postId: postId })
       } else {
-        mutate({ postData: formData, communityId: communityId });
+        onSave?.({ postData: formData, communityId: communityId });
       }
     } catch (error) {
       console.error(error);
@@ -85,7 +86,7 @@ const PostForm = ({ initialData, initialImageURLs, mutate }: PostFormProps) => {
           labelText="게시물 제목"
           name="posterTitle"
           value={postFormData.posterTitle}
-          placeholder=""
+          placeholder="게시물 제목을 작성해주세요"
           validateText=""
           isValid
           onChange={handleChange}

@@ -3,7 +3,7 @@ import { setCookie } from '@utils/cookies/cookies.ts';
 
 export const getCommunityData = async () => {
   try {
-    const response = await axiosInstance.get('community');
+    const response = await axiosInstance.get('community?size=14');
     console.log(response.data);
     return response.data;
   } catch (error) {

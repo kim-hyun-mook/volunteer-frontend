@@ -25,7 +25,12 @@
 import { useState } from 'react';
 import { AdminButton } from '../community/CommunitySearch';
 import styled from 'styled-components';
-function TableSearch({ onSubmit }) {
+
+interface TableSearchProps {
+  onSubmit: (value: string) => void;
+}
+
+function TableSearch({ onSubmit }: TableSearchProps) {
   const [searchNickname, setSearchNickname] = useState('');
 
   const handleSearch = () => {

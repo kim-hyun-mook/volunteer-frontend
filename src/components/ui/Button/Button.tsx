@@ -1,5 +1,6 @@
-interface ButtonProps extends Omit<React.HTMLProps<HTMLButtonElement>, 'size' | 'type'> {
+interface ButtonProps extends Omit<React.HTMLProps<HTMLButtonElement>, 'size'> {
   buttonText: string;
+  type?: 'button' | 'submit' | 'reset';
 }
 
 const Button = ({ buttonText, ...props }: ButtonProps) => {

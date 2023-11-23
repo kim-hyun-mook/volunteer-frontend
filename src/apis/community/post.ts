@@ -1,4 +1,4 @@
-import { axiosImgInstance } from '@apis/axiosInstance/axiosInstance';
+import { axiosImgInstance, axiosInstance } from '@apis/axiosInstance/axiosInstance';
 
 export interface CommunityPost {
   communityData: FormData;
@@ -17,3 +17,9 @@ export const upadateCommunity = async (upadateCommunityPostData: UpdateCommunity
   const response = await axiosImgInstance.put(`community/${communityId}`, communityData);
   return response;
 };
+
+
+export const deleteCommunity = async (communityId: string) => {
+  const response = await axiosInstance.delete(`community/${communityId}`)
+  return response
+}

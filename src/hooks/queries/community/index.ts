@@ -10,18 +10,9 @@ export const useCreateCommunity = () => {
       queryClient.invalidateQueries('community');
       navigate('/');
     },
-    onMutate: async (newCommunity) => {
-      await queryClient.cancelQueries('community');
-      const previousCommunities = queryClient.getQueriesData('community');
-      queryClient.setQueriesData('community', [...previousCommunities, newCommunity]);
-      return { previousCommunities };
-    },
-    onError: (error, newCommunity, context) => {
-      queryClient.setQueryData('communities', context?.previousCommunities);
-    },
   });
-  const handleCreateCommunity = (commuityData: CommunityPost) => {
-    mutate(commuityData);
+  const handleCreateCommunity = (communityData: CommunityPost) => {
+    mutate(communityData);
   };
   return { handleCreateCommunity };
 };
@@ -34,18 +25,10 @@ export const useUpdateCommunity = () => {
       queryClient.invalidateQueries('community');
       navigate('/');
     },
-    onMutate: async (newCommunity) => {
-      await queryClient.cancelQueries('community');
-      const previousCommunities = queryClient.getQueriesData('community');
-      queryClient.setQueriesData('community', [...previousCommunities, newCommunity]);
-      return { previousCommunities };
-    },
-    onError: (error, newCommunity, context) => {
-      queryClient.setQueryData('communities', context?.previousCommunities);
-    },
+
   });
-  const handleCreateCommunity = (commuityData: UpdateCommunity) => {
-    mutate(commuityData);
+  const handleUpdateCommunity = (communityData: UpdateCommunity) => {
+    mutate(communityData);
   };
-  return { handleCreateCommunity };
+  return { handleUpdateCommunity };
 };

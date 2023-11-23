@@ -10,6 +10,14 @@ const SearchBox = styled.div`
   box-sizing: border-box;
 `;
 
+const SelectFilter = styled.select`
+  border: solid 1px #56c9b6;
+  padding: 10px 10px;
+  box-sizing: border-box;
+  border-radius: 5px;
+  margin-right: 5px;
+`;
+
 const InputSearch = styled.input`
   width: 500px;
   border: solid 1px #56c9b6;
@@ -47,4 +55,4 @@ const DataLength = styled.span`
   color: #56c9b6;
 `;
 
-export { SearchBox, InputSearch, SearchBtn, SearchTextResult, DataLength };
+export { SearchBox, SelectFilter, InputSearch, SearchBtn, SearchTextResult, DataLength };

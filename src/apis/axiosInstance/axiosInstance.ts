@@ -17,7 +17,6 @@ const createInstance = (contentType: string) => {
     if (token) {
       config.headers['Authorization'] = `${token}`;
     }
-    console.log(token);
     return config;
   });
 

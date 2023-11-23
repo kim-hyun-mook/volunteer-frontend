@@ -10,7 +10,7 @@ const PostCreatePage = () => {
   const { handleCreatePost } = useCreatePost();
   return (
     <Section sectionTitle="게시글 작성">
-      <PostForm initialData={INITIDATA} mutate={handleCreatePost} />
+      <PostForm initialData={INITIDATA} onSave={handleCreatePost} />
     </Section>
   );
 };

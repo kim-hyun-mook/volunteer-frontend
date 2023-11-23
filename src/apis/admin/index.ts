@@ -15,7 +15,7 @@ export const getAllUser = async (): Promise<UserList[]> => {
   return response.data.data.userList;
 };
 
-export const searchCommunity = async (type, keyword): Promise<any> => {
+export const searchCommunity = async (type: string, keyword: string): Promise<any> => {
   return axiosImgInstance
     .get(`community/search/${type}`, {
       params: {

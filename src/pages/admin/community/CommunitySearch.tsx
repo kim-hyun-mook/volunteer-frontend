@@ -1,7 +1,11 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 
-function CommunitySearch({ onSubmit }) {
+interface SearchProps {
+  onSubmit: (data: { condition: string; title: string; author: string }) => void;
+}
+
+function CommunitySearch({ onSubmit }: SearchProps) {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchCondition, setSearchCondition] = useState('title');
 
@@ -21,7 +25,7 @@ function CommunitySearch({ onSubmit }) {
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />
-      <AdminButton class="admin" onClick={handleSearch}>
+      <AdminButton className="admin" onClick={handleSearch}>
         검색
       </AdminButton>
     </AdminCommunityList>

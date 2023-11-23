@@ -8,17 +8,23 @@ import { useMutation, useQuery, useQueryClient } from 'react-query';
 import jwtDecode from 'jwt-decode';
 import { getCookie } from '@utils/cookies/cookies';
 
+interface DecodedToken {
+  userId: string;
+  sub: string;
+}
+
 function Comments() {
   const queryClient = useQueryClient();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [editingCommentId, setEditingCommentId] = useState(null);
   const { communityId, postId } = useParams();
-  const [editingComments, setEditingComments] = useState({});
+  const [editingComments, setEditingComments] = useState<Record<string, string>>({});
+
   // 토큰
   const token: string | null = getCookie('accessToken');
   let loggedInUserId: string | null;
   let decodedToken: DecodedToken | null = null;
 
-  decodedToken;
   if (token) {
     decodedToken = jwtDecode<DecodedToken>(token);
     loggedInUserId = decodedToken?.sub;
@@ -26,17 +32,17 @@ function Comments() {
   }
 
   // useQuery 훅을 사용하여 댓글 목록을 가져옴
-  const { isLoading, isError, data } = useQuery<CommentList[], Error>(
+  const { data } = useQuery<CommentList, Error>(
     ['comments', Number(postId), Number(communityId)], // 쿼리 키 수정
     async () => {
       const result = await getComments(Number(postId), Number(communityId));
       console.log(result);
-      return result;
+      return result; // commentList 속성을 직접 반환
     }
   );
 
   // 더보기 버튼 상태를 객체로 변경
-  const [showOptions, setShowOptions] = useState({});
+  const [showOptions, setShowOptions] = useState<Record<string, boolean>>({});
 
   // 더보기 버튼 토글 함수를 수정
   const toggleOptions = (id: any) => {
@@ -45,15 +51,6 @@ function Comments() {
       [id]: !prevState[id],
     }));
   };
-  // const onChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-  //   const {
-  //     target: { name, value },
-  //   } = event;
-
-  //   if (name === 'comment') {
-  //     setComment(value);
-  //   }
-  // };
 
   // 댓글 수정
   const editCommentMutation = useMutation(putComment, {
@@ -79,12 +76,13 @@ function Comments() {
     }
   };
 
-  const handleEditSubmit = async (commentId) => {
+  const handleEditSubmit = async (commentId: number) => {
     try {
       await editCommentMutation.mutateAsync({
         commentId: commentId,
         communityId: Number(communityId),
         commentContent: editingComments[commentId],
+        postId: Number(postId),
       });
       setEditingComments((prev) => {
         const newState = { ...prev };
@@ -96,27 +94,6 @@ function Comments() {
     }
   };
 
-  // const getCommentId = (commentItem) => {
-  //   return commentItem.commentId;
-  // };
-
-  // const handleDeleteComment = async (commentId, communityId) => {
-  //   try {
-  //     await deleteCommentMutation.mutateAsync({ commentId, communityId });
-  //   } catch (error) {
-  //     console.error('댓글 삭제 실패:', error);
-  //   }
-  // };
-
-  // 로딩 중이거나 에러가 발생했을 때 렌더링할 내용
-  // if (isLoading) {
-  //   return <div>Loading...</div>;
-  // }
-
-  // if (isError) {
-  //   return <div>에러가 발생하였습니다.{isError.message}</div>;
-  // }
-
   if (!data) {
     return <div>아직 작성된 댓글이 없습니다.</div>;
   }
@@ -125,8 +102,7 @@ function Comments() {
     <>
       <div className="Comment">Comment</div>
       {data &&
-        data.commentList &&
-        data.commentList.map((commentItem: any) => (
+        data?.commentList?.map((commentItem: any) => (
           <S.CommentsList key={commentItem.commentId}>
             <S.CommentBox>
               <S.CommentProfileBox>
@@ -161,7 +137,7 @@ function Comments() {
                         </S.CommentOptionBtn>
                         <S.CommentOptionBtn
                           className="commentDelete"
-                          onClick={() => handleDeleteComment(commentItem.commentId, communityId)}
+                          onClick={() => handleDeleteComment(commentItem.commentId, Number(communityId))}
                         >
                           삭제
                         </S.CommentOptionBtn>
@@ -174,8 +150,6 @@ function Comments() {
                 <>
                   <TextareaLabel
                     name="comment"
-                    id="comment"
-                    required
                     value={editingComments[commentItem.commentId]}
                     placeholder="댓글을 수정해주세요."
                     onChange={(event) =>
@@ -184,6 +158,12 @@ function Comments() {
                         [commentItem.commentId]: event.target.value,
                       })
                     }
+                    labelText={''}
+                    validateText={''}
+                    isValid={false}
+                    onBlur={function (): void {
+                      throw new Error('Function not implemented.');
+                    }}
                   />
                   <S.CommentOptionBtnContainer>
                     <S.CommentOptionBtn title="edit" onClick={() => handleEditSubmit(commentItem.commentId)}>

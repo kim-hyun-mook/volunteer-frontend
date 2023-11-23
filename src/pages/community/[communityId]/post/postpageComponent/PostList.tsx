@@ -1,7 +1,7 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import * as S from '@pages/community/stlyes/PostStyle.ts';
 import { Link } from 'react-router-dom';
-import { deletePostData, getPostData } from '@apis/community/community.ts';
+import { deletePostData } from '@apis/community/community.ts';
 import { getCookie } from '@utils/cookies/cookies.ts';
 import jwtDecode from 'jwt-decode';
 

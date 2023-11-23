@@ -1,5 +1,4 @@
 import * as S from '@pages/community/stlyes/PostStyle.ts';
-import { PosterList } from '@interfaces/post.ts';
 
 // interface Props {
 //   posterListData: { data: { posterList: PosterList[] } } | undefined;

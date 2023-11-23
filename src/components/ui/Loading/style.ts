@@ -41,7 +41,7 @@ export const Letter = styled.span<LatterProps>`
   height: 10px;
   left: 50%;
   top: 50%;
-  font-size: 10px;
+  font-size: 12px;
   transform-origin: 0 0;
   ${({ index, total }) => getRotationStyles(index, total)};
   color: #56c9b6;

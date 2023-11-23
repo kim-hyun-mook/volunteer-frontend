@@ -1,6 +1,6 @@
 import { Column } from 'react-table';
 
-export const memberColumns: Column<Data>[] = [
+export const memberColumns: readonly Column<object>[] = [
   {
     Header: '이메일',
     accessor: 'email',
@@ -31,5 +31,6 @@ export const memberColumns: Column<Data>[] = [
   {
     Header: '탈퇴여부',
     accessor: 'deleted',
+    Cell: ({ value }: { value: boolean }) => <span>{value ? '탈퇴된 회원' : '-'}</span>,
   },
 ];

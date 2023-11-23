@@ -2,7 +2,7 @@ import { axiosInstance } from "@apis/axiosInstance/axiosInstance"
 
 export const getMyMakeCommunites = async () => {
 	try {
-		const response = await axiosInstance.get('mypage/communuty')
+		const response = await axiosInstance.get('mypage/community')
 		return response
 		
 	} catch (error) {
@@ -34,7 +34,7 @@ export const getMyActive= async () => {
 
 export const unsubscribing = async (token:string) => {
 	try {
-		const response = await axiosInstance.post('/mypage/withdrawal', {}, {
+		const response = await axiosInstance.post('mypage/withdrawal', {
 			headers: {
 				'Authorization': token 
 			}

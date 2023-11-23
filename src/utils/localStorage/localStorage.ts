@@ -5,8 +5,10 @@ export const setLocalStorage = (provider: string, email: string) => {
 	}
 };
 
-export const getLocalStorage = (provider:string) => {
-	const getLocalStorageByGetItem = localStorage.getItem(`${ provider }`)
+export const getLocalStorage = (provider: string) => {
+	
+	const getLocalStorageByGetItem = localStorage.getItem(`${provider}`)
+	console.log(getLocalStorageByGetItem)
 	if (getLocalStorageByGetItem) {
 		const localStorageParse = JSON.parse(getLocalStorageByGetItem);
 		return {

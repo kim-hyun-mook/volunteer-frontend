@@ -1,9 +1,11 @@
 import styled from 'styled-components';
 import { CommunityList } from './CommunityList';
+import AdminSidebar from '@components/adminLayout/AdminSidebar';
 
 const CommunitySearchPage = () => {
   return (
     <ListWrap>
+      <AdminSidebar />
       <div>
         <CommunityList />
       </div>

@@ -5,6 +5,7 @@ import { useState } from 'react';
 import LikeButton from './Like';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getPostDetail, likePost, PosterDetail } from '@apis/post/detail';
+import { manageStatus } from '@hooks/queries/error';
 
 // 게시글 상세 데이터 가져오기(axios 사용할 것)
 function PostDetail() {
@@ -13,7 +14,7 @@ function PostDetail() {
   const { communityId, postId } = useParams();
 
   //게시글 상세 정보를 불러오는 쿼리
-  const { isLoading, isError, data } = useQuery<PosterDetail, Error>('detail', async () => {
+  const { isLoading, isError, error, data } = useQuery<PosterDetail, Error>('detail', async () => {
     const result = await getPostDetail(Number(postId), Number(communityId));
     console.log(result);
     return result;
@@ -33,18 +34,16 @@ function PostDetail() {
     setLiked(!liked);
   };
 
-  const handleLikeButtonClick = () => {
+  const handleLikeButtonClick = async () => {
     toggleLike(); // 좋아요 상태 토글
-    likePostMutation.mutate(Number(postId), Number(communityId)); // 좋아요 수 변경 API 호출
+    await likePostMutation.mutate(); // 좋아요 수 변경 API 호출
   };
 
   // 로딩 중이거나 에러가 발생했을 때 렌더링할 내용
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
+  const managedStatus = manageStatus({ isLoading, isError }, { error });
 
-  if (isError) {
-    return <div>에러가 발생하였습니다.{isError.message}</div>;
+  if (managedStatus) {
+    return managedStatus;
   }
 
   if (!data) {
