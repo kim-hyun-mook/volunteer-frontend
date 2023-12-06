@@ -1,5 +1,5 @@
 import { FormEvent } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { PostData, UpdatePostData } from '@apis/post';
 import { useFormState } from '@hooks/form';
 import TextareaLabel from '@components/ui/Textarea';
@@ -7,14 +7,12 @@ import { FileInput, Input } from '@components/ui/Input';
 import * as S from './style';
 import useShownModal from '@hooks/modal';
 import Modal from '@components/ui/Modal';
-
-
 interface PostFormProps {
   initialData: {
     [key: string]: any;
   };
   onSave?: (postData: PostData) => void;
-  onEdit?:(postData: UpdatePostData) => void
+  onEdit?: (postData: UpdatePostData) => void;
   initialImageURLs?: (string | null)[]; // ['slkeke']  [null]
 }
 
@@ -22,6 +20,8 @@ const PostForm = ({ initialData, initialImageURLs, onSave, onEdit }: PostFormPro
   const pathName = useLocation().pathname;
   const { communityId, postId } = useParams();
   const isPostCreatePage = pathName === `/community/${communityId}/post/create`;
+  // 게시물 생성 시 해당 게시물로 이동
+  const navigate = useNavigate();
 
   const { imageURLs, postFormData, setImageURLs, setPostFormData, handleChange, handleFileDelectClick } = useFormState(
     initialData,
@@ -39,7 +39,7 @@ const PostForm = ({ initialData, initialImageURLs, onSave, onEdit }: PostFormPro
     setIsShown(true);
   };
 
-  const handleConfirmClick = () => {
+  const handleConfirmClick = async () => {
     const isExistFile = file.length;
     const formData = new FormData();
 
@@ -57,9 +57,13 @@ const PostForm = ({ initialData, initialImageURLs, onSave, onEdit }: PostFormPro
       const blob = new Blob([jsonFormData], { type: 'application/json' });
       formData.append('data', blob);
       if (postId) {
-        onEdit?.({ postData: formData, communityId: communityId, postId: postId })
+        await onEdit?.({ postData: formData, communityId: communityId, postId: postId });
+        // 수정 완료 후, 해당 게시물로 리다이렉트
+        navigate(`/community/${communityId}/post/${postId}`);
       } else {
-        onSave?.({ postData: formData, communityId: communityId });
+        await onSave?.({ postData: formData, communityId: communityId });
+        // 생성 완료 후, 게시물 리스트로 리다이렉트
+        navigate(`/community/${communityId}/post/`);
       }
     } catch (error) {
       console.error(error);
@@ -70,7 +74,7 @@ const PostForm = ({ initialData, initialImageURLs, onSave, onEdit }: PostFormPro
       file: [],
     });
     setImageURLs([]);
-    setIsShown(false)
+    setIsShown(false);
   };
   return (
     <>
@@ -90,6 +94,7 @@ const PostForm = ({ initialData, initialImageURLs, onSave, onEdit }: PostFormPro
           validateText=""
           isValid
           onChange={handleChange}
+          type={'text'}
         />
         <FileInput
           labelText="이미지"
@@ -100,6 +105,12 @@ const PostForm = ({ initialData, initialImageURLs, onSave, onEdit }: PostFormPro
           onChange={handleChange}
           pageName="post"
           onClick={handleFileDelectClick}
+          isValid={false}
+          value={[]}
+          validateText={''}
+          onBlur={function (): void {
+            throw new Error('Function not implemented.');
+          }}
         />
         <TextareaLabel
           labelText="게시물 내용"
@@ -109,6 +120,10 @@ const PostForm = ({ initialData, initialImageURLs, onSave, onEdit }: PostFormPro
           validateText=""
           onChange={handleChange}
           isPage="postFormPage"
+          placeholder={''}
+          onBlur={function (): void {
+            throw new Error('Function not implemented.');
+          }}
         />
         <S.BtnWrap>
           <S.StButton buttonText="제출하기" />

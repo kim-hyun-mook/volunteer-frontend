@@ -6,52 +6,30 @@ import { useCommunityId } from '@hooks/useParamsId/useCommunityId';
 import PostList from '@pages/community/[communityId]/post/postpageComponent/PostList';
 import { useQuery } from 'react-query';
 import { getPostData } from '@apis/community/community.ts';
-import { ReactElement } from 'react';
 
-// Props 타입 정의
-type Props = {
-  posterListData: any;
-  communityIdNumber: any;
-  posterIdNumber: any;
-  index: any;
-  post: any;
-};
-
-const PostPage = () => {
-  // useParams로 받아온 커뮤니티 아이디
+const PostPage = (props: any) => {
   const communityIdNumber: any = useCommunityId();
 
-  let posterList: any = null;
-  let isLoading: boolean = true;
-  let error: Error | null = null;
-
-  // useQuery를 사용하여 데이터를 캐싱
-  const {
-    data,
-    isLoading: queryIsLoading,
-    error: queryError,
-  } = useQuery<any, Error>(['post', communityIdNumber], () => getPostData(communityIdNumber), {
+  const { data, error } = useQuery<any, Error>(['post', communityIdNumber], () => getPostData(communityIdNumber), {
     enabled: communityIdNumber !== undefined,
   });
 
-  const posterListData = data;
+  const posterListData = data ? data : props.posterListData;
 
   console.log('posterListData:', posterListData);
 
-  if (data) {
-    posterList = data;
-    console.log('Data:', posterList);
-  }
-
-  if (queryIsLoading) {
-    isLoading = queryIsLoading;
-    console.log('Loading...');
-  }
-
-  if (queryError) {
-    error = queryError;
+  if (error) {
     console.error('An error has occurred:', error);
   }
+
+  // if (isLoading) {
+  //   return (
+  //     <S.LodaingBox>
+  //       <S.LoadingStyle></S.LoadingStyle>
+  //       <S.LodaingText>LOADING...</S.LodaingText>
+  //     </S.LodaingBox>
+  //   );
+  // }
 
   return (
     <W.PostCommonLayout>

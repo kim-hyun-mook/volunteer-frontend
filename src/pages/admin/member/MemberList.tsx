@@ -18,8 +18,7 @@ import { UserList } from '@apis/admin';
 
 export const MemberList: React.FC = () => {
   const [data, setData] = useState<UserList[]>([]);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [loading, setLoading] = useState(true);
+  const [, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(0);
 
   useEffect(() => {

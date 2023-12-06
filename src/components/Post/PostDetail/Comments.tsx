@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import TextareaLabel from '@components/ui/Textarea';
 import * as S from './style';
 import EllipsisIcon from '../../../assets/images/ellipsis.svg';
@@ -7,6 +7,7 @@ import { getComments, CommentList, putComment, deleteComment } from '@apis/post/
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import jwtDecode from 'jwt-decode';
 import { getCookie } from '@utils/cookies/cookies';
+import Modal from '@components/ui/Modal';
 
 interface DecodedToken {
   userId: string;
@@ -15,10 +16,12 @@ interface DecodedToken {
 
 function Comments() {
   const queryClient = useQueryClient();
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [editingCommentId, setEditingCommentId] = useState(null);
+  const [, setEditingCommentId] = useState(null);
   const { communityId, postId } = useParams();
   const [editingComments, setEditingComments] = useState<Record<string, string>>({});
+  const errorMessagesRef = useRef<HTMLDivElement | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [commentToDelete, setCommentToDelete] = useState<number | null>(null);
 
   // 토큰
   const token: string | null = getCookie('accessToken');
@@ -68,15 +71,37 @@ function Comments() {
     },
   });
 
-  const handleDeleteComment = (commentId: number, communityId: number) => {
-    try {
-      deleteCommentMutation.mutateAsync({ commentId, communityId });
-    } catch (error) {
-      console.error(error);
+  const handleOpenModal = (event: React.MouseEvent, commentId: number) => {
+    event.stopPropagation();
+    setCommentToDelete(commentId);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleDeleteComment = async () => {
+    if (commentToDelete) {
+      try {
+        await deleteCommentMutation.mutateAsync({ commentId: commentToDelete, communityId: Number(communityId) });
+        setIsModalOpen(false);
+      } catch (error) {
+        console.error(error);
+      }
     }
   };
 
+  // 댓글 수정
   const handleEditSubmit = async (commentId: number) => {
+    // 텍스트 에어리어가 비어있는지 확인
+    if (!editingComments[commentId].trim()) {
+      if (errorMessagesRef.current) {
+        errorMessagesRef.current.innerText = '댓글을 입력해주세요.'; // 에러 메시지 업데이트
+      }
+      return; // 텍스트 에어리어가 비어있다면 함수를 종료
+    }
+
     try {
       await editCommentMutation.mutateAsync({
         commentId: commentId,
@@ -89,6 +114,9 @@ function Comments() {
         delete newState[commentId];
         return newState;
       });
+      if (errorMessagesRef.current) {
+        errorMessagesRef.current.innerText = ''; // 성공적으로 수정되면 에러 메시지를 제거
+      }
     } catch (error) {
       console.error('댓글 수정 중 오류 발생', error);
     }
@@ -118,7 +146,7 @@ function Comments() {
                 </S.ProfileWrap>
                 <S.CommentAuthor>{commentItem.commentAuthor}</S.CommentAuthor>
                 <S.CommentText>{commentItem.commentContent}</S.CommentText>
-                <S.CommentDate>{commentItem.commentCreatedAt}</S.CommentDate>
+                <S.CommentDate>{commentItem.commentUpdatedAt}</S.CommentDate>
                 {Number(commentItem.userId) === Number(decodedToken?.sub) && (
                   <S.OptionArea className="optionsIcon" onClick={() => toggleOptions(commentItem.commentId)}>
                     <img src={EllipsisIcon} alt="더보기" style={{ width: '20px', height: '20px' }} />
@@ -137,16 +165,23 @@ function Comments() {
                         </S.CommentOptionBtn>
                         <S.CommentOptionBtn
                           className="commentDelete"
-                          onClick={() => handleDeleteComment(commentItem.commentId, Number(communityId))}
+                          onClick={(event) => handleOpenModal(event, commentItem.commentId)}
                         >
                           삭제
                         </S.CommentOptionBtn>
+                        {isModalOpen && (
+                          <Modal
+                            modalText="이 댓글을 삭제하시겠습니까?"
+                            handleConfirmClick={handleDeleteComment}
+                            handleCloseClick={handleCloseModal}
+                          />
+                        )}
                       </div>
                     )}
                   </S.OptionArea>
                 )}
               </S.CommentProfileBox>
-              {editingComments[commentItem.commentId] && (
+              {Object.prototype.hasOwnProperty.call(editingComments, commentItem.commentId) && (
                 <>
                   <TextareaLabel
                     name="comment"
@@ -165,6 +200,7 @@ function Comments() {
                       throw new Error('Function not implemented.');
                     }}
                   />
+                  <div ref={errorMessagesRef} style={{ color: 'blue' }}></div>
                   <S.CommentOptionBtnContainer>
                     <S.CommentOptionBtn title="edit" onClick={() => handleEditSubmit(commentItem.commentId)}>
                       등록

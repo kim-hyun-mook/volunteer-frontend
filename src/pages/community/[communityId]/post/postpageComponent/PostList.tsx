@@ -31,7 +31,7 @@ const PostList = ({ posterListData, communityIdNumber }: Props) => {
   console.log('communityIdNumber:', communityIdNumber);
 
   if (!posterListData || !posterListData.data || !posterListData.data.posterList) {
-    return <S.NoContent>컨텐츠가 없습니다.</S.NoContent>;
+    return <S.NoContent>게시글이 없습니다.</S.NoContent>;
   }
   const [showToggleBox, setShowToggleBox] = useState(false);
   const handleOptionBtnClick = () => {
@@ -63,9 +63,7 @@ const PostList = ({ posterListData, communityIdNumber }: Props) => {
   }, [postList]);
 
   return postList.map((post: any, index: any) => {
-    console.log('Post user ID:', post.userId);
     const posterIdNumber = post.posterId;
-    console.log('posterIdNumber:', posterIdNumber);
 
     return (
       <S.PostListBox>
